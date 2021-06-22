@@ -1,83 +1,54 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from "react-redux";
-let pos = require('pos');
 
-import { tagList, tagValidator } from '../utils/posHandlers'
-import { setOriginalStoryArray, addNewWordToReplacementList, setWordList } from '../actions/index'
+
+import { wordTagger } from '../utils/posHandlers'
+import { setOriginalStoryArray, addNewWordToReplacementList, replaceWordsInStory } from '../actions/index'
 
 function Story(props) {
 
 
-let tagger = new pos.Tagger();
 
-let [ wordList, setWordList ] = useState([])
+
+let [ selectedWordList, setSelectedWordList ] = useState([])
 let [ error, setError ] = useState('')
 let [ formData, setFormData ] = useState([])
 let [ newWord, setNewWord ] = useState({})
 
-const originalStory = 'This is some sample text. This text can contain multiple sentences.'
-const originalStoryArray = originalStory.split(' ')
+const originalStory = 'This is some sample text. This text can contain multiple beautiful sentences.'
+let originalStoryArray = originalStory.split(' ')
+originalStoryArray = originalStoryArray.map(element => element.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,""))
 
 useEffect(() => {
     props.dispatch(setOriginalStoryArray(originalStoryArray))
 }, [])
 
 const addToWordList = (word) => {
-    let newWord = word.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"")
-    console.log(newWord)
-    if(wordList.find(item => item.word == newWord)) {
-        setError("You've already chosen that word")
-        return
-    } else {
-        let indexes = []
-        originalStoryArray.map((item, i) => {
-            if(item === newWord) {
-                indexes.push(i)
-            }
-        })
-        let wordToTag = []
-        wordToTag.push(newWord)
-        let posTag = tagger.tag(wordToTag)[0][1]
-        console.log("part of speech", posTag)
-        let valid = tagValidator(posTag)
-        console.log(valid)
-        if(valid !== true) {
-            setError("That's a tricky one, try another word")
-            return
-        } else {
-            let partOfSpeech = tagList.find(item => item.tag === posTag)
-            setError('')
-            console.log("index", indexes)
-            let wordToAdd = {word: newWord, storyArrayIndexes: indexes, pos: partOfSpeech.pos}
-            console.log(wordToAdd)
-            setWordList([...wordList, wordToAdd])
-            console.log(wordList)
-        }
-    }
+    let wordToAdd = wordTagger(word, selectedWordList, props.madlibs.story)
+    console.log(wordToAdd)
+    setSelectedWordList([...selectedWordList, wordToAdd])
+    console.log(selectedWordList)
 
 }
 
 function changeHandler(e, indexes) {
     let addWord = {
-        word: [e.target.value],
+        word: e.target.value,
         index: indexes
     }
     setNewWord(addWord)
 }
-
-//for a given word, it needs to replace a word in the storyArray at every array index from the initial story
-//e.g. 
+ 
     const submitHandler = (e) => {
+        //adds user input word to "wordList" list in state ready for substitution
         e.preventDefault()
         props.dispatch(addNewWordToReplacementList(newWord))
     }
 
-    const submitWords = () => {
-        let newList = props.list
-        return props.dispatch(setWordList(newList))
-        .then(() => {
-            return props.history.push('/output')
-        })
+    const submitMadLib = () => {
+        console.log("wordlist from state", selectedWordList)
+        props.dispatch(replaceWordsInStory())
+        props.history.push('/output')
     }
 
 
@@ -90,18 +61,18 @@ function changeHandler(e, indexes) {
             })}
             <p>{error}</p>
             <ul>
-                {wordList.map((item, i) => (
+                {selectedWordList.length > 0 && selectedWordList.map((item, i) => (
                     <li key={i}>{item.word}: {item.pos}</li>
                 ))}
             </ul>
-            {wordList.map(item => (
+            {selectedWordList.length > 0 && selectedWordList.map((item, i) => (
             <form onSubmit={(e) => submitHandler(e)}>
-                <label htmlFor={item.pos}>{item.pos}</label>
-                <input type='text' id={item.pos} name={item.pos} onChange={(e) => changeHandler(e, item.storyArrayIndexes)}/>
-                <button type="submit">Submit</button>
+                <label key={100 + i} htmlFor={item.pos}>{item.pos}</label>
+                <input key={200 + i} type='text' id={item.pos} name={item.pos} onChange={(e) => changeHandler(e, item.storyArrayIndexes)}/>
+                <button key={300 + i} type="submit">Submit</button>
             </form>
             ))}
-            <button onClick={() => submitWords()}>Show me my MadLib!</button>
+            <button onClick={() => submitMadLib()}>Show me my MadLib!</button>
         </div>
         </>
     )
@@ -110,7 +81,7 @@ function changeHandler(e, indexes) {
 function mapStateToProps(state) {
     return {
       list: state.list,
-      story: state.story
+      madlibs: state.madlibs
     };
   }
 

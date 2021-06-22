@@ -1,9 +1,7 @@
 import { combineReducers } from 'redux'
 
-import list from './list'
-import story from './story'
+import madlibs from './madlibs'
 
 export default combineReducers({
-  list,
-  story
+  madlibs
 })

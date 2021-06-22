@@ -21,17 +21,8 @@
 // VBG verb, gerund            eating
 // VBP Verb, present           eat
 
-function tagValidator(pos) {
-    let valid = false
-    console.log("part of speech", pos)
-    tagList.find(item => {
-        if(item.tag === pos) {
-            console.log("true")
-            valid = true
-        }
-    })
-    return valid
-}
+let pos = require('pos');
+let tagger = new pos.Tagger();
 
 const tagList = [{
     tag: 'JJ',
@@ -66,7 +57,56 @@ const tagList = [{
     pos: 'verb-gerund'
 }]
 
+function wordTagger(word, wordList, storyArray) {
+    let error = ''
+    let newWord = word.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"")
+    console.log(newWord)
+    if(wordList.find(item => item.word == newWord)) {
+        error = "You've already chosen that word"
+        return error
+    } else {
+        let indexes = []
+        storyArray.forEach((item, i) => {
+            if(item === newWord) {
+                indexes.push(i)
+            }
+        })
+        let wordToTag = []
+        wordToTag.push(newWord)
+        let posTag = tagger.tag(wordToTag)[0][1]
+        console.log("part of speech", posTag)
+        let valid = tagValidator(posTag)
+        console.log(valid)
+        if(valid !== true) {
+            error = "Sorry, you can only choose nouns, verbs, adjectives and adverbs."
+            return error
+        } else {
+            let partOfSpeech = tagList.find(item => item.tag === posTag)
+            error = ''
+            console.log("index", indexes)
+            let wordToAdd = {
+                word: newWord, 
+                storyArrayIndexes: indexes, 
+                pos: partOfSpeech.pos
+            }
+            return wordToAdd
+        }
+    }
+}
+function tagValidator(pos) {
+    let valid = false
+    console.log("part of speech", pos)
+    tagList.find(item => {
+        if(item.tag === pos) {
+            console.log("true")
+            valid = true
+        }
+    })
+    return valid
+}
+
+
+
 module.exports = {
-    tagList,
-    tagValidator
+    wordTagger
 }
