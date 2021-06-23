@@ -1,7 +1,7 @@
 // let words = new pos.Lexer().lex('This is some sample text. This text can contain multiple sentences.');
 // console.log(words)
 // let tagger = new pos.Tagger();
-// let taggedWords = tagger.tag(words);
+// let taggedWords = tagger.tag(words); //takes a list of words
 // console.log(taggedWords)
 
 // for (let i=0; i < taggedWords.length ; i++) {
@@ -30,11 +30,11 @@ const tagList = [{
 }, 
 {
     tag: 'NN',
-    pos: 'noun-singular'
+    pos: 'noun (singular)'
 },
 {
     tag: 'NNS',
-    pos: 'noun-plural'
+    pos: 'noun (plural)'
 },
 {
     tag: 'RB',
@@ -42,27 +42,27 @@ const tagList = [{
 },
 {
     tag: 'VB',
-    pos: 'verb-base-form'
+    pos: 'verb (base form, e.g. eat, sleep)'
 },
 {
     tag: 'VBP',
-    pos: 'verb-present'
+    pos: 'verb (present tense, e.g. eat, sleep)'
 },
 {
     tag: 'VBD',
-    pos: 'verb-past-tense'
+    pos: 'verb (past tense, e.g. ate, slept)'
 },
 {
     tag: 'VBG',
-    pos: 'verb-gerund'
+    pos: 'verb (gerund, e.g. eating, sleeping)'
 }]
 
 function wordTagger(word, wordList, storyArray) {
-    let error = ''
+    let error = {}
     let newWord = word.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"")
     console.log(newWord)
     if(wordList.find(item => item.word == newWord)) {
-        error = "You've already chosen that word"
+        error.errorMessage = "You've already chosen that word"
         return error
     } else {
         let indexes = []
@@ -78,11 +78,11 @@ function wordTagger(word, wordList, storyArray) {
         let valid = tagValidator(posTag)
         console.log(valid)
         if(valid !== true) {
-            error = "Sorry, you can only choose nouns, verbs, adjectives and adverbs."
+            error.errorMessage = "Sorry, you can only choose nouns, verbs, adjectives and adverbs."
             return error
         } else {
             let partOfSpeech = tagList.find(item => item.tag === posTag)
-            error = ''
+            error = {}
             console.log("index", indexes)
             let wordToAdd = {
                 word: newWord, 
@@ -105,8 +105,44 @@ function tagValidator(pos) {
     return valid
 }
 
+function turnTagIntoWord (tag, tagList) {
+    let thisOne = tagList.find(element => element.tag === tag)
+    console.log(thisOne.pos)
+    return thisOne.pos
+}
+
+
+
+//check that the words the user has entered are the correct part of speech
+function validateWordTypes(array) {
+    let errors = []
+//for each array item, check that the pos of item.word matches item.pos
+for(let i=0; i < array.length; i++) {
+    let wordToTag = []
+    wordToTag.push(array[i].word)
+    console.log(wordToTag)
+    let posTag = tagger.tag(wordToTag)[0][1]
+    console.log(posTag)
+    let wordTag = turnTagIntoWord(posTag, tagList)
+    console.log(wordTag)
+    console.log(array[i].pos)
+    if(wordTag === array[i].pos) {
+        console.log("match!")
+        return true
+    } else {
+        let errMessage = `Sorry, ${wordToTag} is not a ${array[i].pos}. Try again and make sure you enter a ${array[i].pos}!`
+        errors.push(errMessage)
+        return errors
+    }
+}
+//if they don't match, then remove from list, send error message
+
+}
+
 
 
 module.exports = {
-    wordTagger
+    tagValidator,
+    wordTagger,
+    validateWordTypes
 }

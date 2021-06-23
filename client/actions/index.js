@@ -3,7 +3,8 @@
 export const ADD_NEW_WORD = 'ADD_NEW_WORD'
 export const SET_ORIGINAL_STORY_ARRAY = 'SET_ORIGINAL_STORY_ARRAY'
 export const REPLACE_WORDS_IN_STORY = 'REPLACE_WORDS_IN_STORY'
-export const SET_WORD_LIST = 'SET_WORD_LIST'
+export const RESET_WORD_LIST = 'RESET_WORD_LIST'
+export const REPLACE_WORD_IN_LIST = 'REPLACE_WORD_IN_LIST'
 
 export function addNewWordToReplacementList (newWord) {
   return {
@@ -12,10 +13,16 @@ export function addNewWordToReplacementList (newWord) {
   }
 }
 
-export function setWordList (list) {
+export function replaceWordInWordList (newWord) {
   return {
-    type: SET_WORD_LIST,
-    list
+    type: REPLACE_WORD_IN_LIST,
+    newWord
+  }
+}
+
+export function resetWordList () {
+  return {
+    type: RESET_WORD_LIST
   }
 }
 

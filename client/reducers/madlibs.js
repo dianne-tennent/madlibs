@@ -1,8 +1,9 @@
 import { 
     REPLACE_WORDS_IN_STORY, 
     SET_ORIGINAL_STORY_ARRAY, 
-    SET_WORD_LIST,
-    ADD_NEW_WORD
+    RESET_WORD_LIST,
+    ADD_NEW_WORD,
+    REPLACE_WORD_IN_LIST
  } from '../actions'
 
 const initialState = {
@@ -16,11 +17,21 @@ const madlibs = (state = initialState, action) => {
       case ADD_NEW_WORD:
         let newState = {...state, wordList: [...state.wordList, action.newWord]}
         return newState
+    case REPLACE_WORD_IN_LIST:
+        console.log("action.newWord", action.newWord)
+        let wordListCopy = state.wordList.map((element) => {
+            if(element.index === action.newWord.index) {
+                // Copy the object before mutating
+                return Object.assign({}, element, action.newWord)
+            }
+            return element
+            })
+        return {...state, wordList: wordListCopy}
     case SET_ORIGINAL_STORY_ARRAY:
         let storyState = {...state, story: action.array}
       return storyState
-    case SET_WORD_LIST:
-        state.wordList = action.list
+    case RESET_WORD_LIST:
+        state.wordList = []
         return state
     case REPLACE_WORDS_IN_STORY:
         console.log(state.story)
