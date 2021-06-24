@@ -1,6 +1,6 @@
 import { 
     REPLACE_WORDS_IN_STORY, 
-    SET_ORIGINAL_STORY_ARRAY, 
+    SET_STORY, 
     RESET_WORD_LIST,
     ADD_NEW_WORD,
     REPLACE_WORD_IN_LIST
@@ -27,8 +27,10 @@ const madlibs = (state = initialState, action) => {
             return element
             })
         return {...state, wordList: wordListCopy}
-    case SET_ORIGINAL_STORY_ARRAY:
-        let storyState = {...state, story: action.array}
+    case SET_STORY:
+        let storyArray = action.story.split(' ')
+        storyArray = storyArray.map(element => element.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,""))
+        let storyState = {...state, story: storyArray}
       return storyState
     case RESET_WORD_LIST:
         state.wordList = []

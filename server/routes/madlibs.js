@@ -4,14 +4,14 @@ const db = require('../db/madlibs')
 
 const router = express.Router()
 
-router.get('/', (req, res) => {
-  db.getFruits()
+router.get('/:story', (req, res) => {
+  const story = req.params.story
+  db.getStoryByName(story)
     .then(results => {
-      res.json({ fruits: results.map(fruit => fruit.name) })
+      res.json(results)
       return null
     })
     .catch(err => {
-      console.log(err)
       res.status(500).json({ message: 'Somthing went wrong' })
     })
 })

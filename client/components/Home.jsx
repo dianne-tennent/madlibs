@@ -11,9 +11,13 @@ function Home (props) {
 
   return (
     <>
-      <h1>Play Mad Libs!</h1>
+      <div className='header'>
+      <h1>Let's Play Madlibs!</h1>
+      </div>
+      <div className='menu'>
       <button onClick={() => navigate('/how')}>How?</button>
       <button onClick={() => navigate('/choose')}>Play</button>
+      </div>
     </>
   )
 }

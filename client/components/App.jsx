@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { HashRouter as Router, Route, Switch } from 'react-router-dom'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 
@@ -9,6 +9,7 @@ import HowToPlay from './HowToPlay'
 import ChooseStory from './ChooseStory'
 import Story from './Story'
 import OutPut from './OutPut'
+import AddStory from './AddStory'
 
 function App (props) {
 
@@ -16,12 +17,15 @@ function App (props) {
   return (
     <>
 
-      <div className='app'>
+      <div className='container'>
       <Route exact path='/' component={Home}/>
       <Route exact path='/how' component={HowToPlay}/>
       <Route exact path='/choose' component={ChooseStory}/>
       <Route exact path='/output' component={OutPut}/>
-      <Route exact path='/play' component={Story}/>
+      <Route exact path='/play/:story'>
+      <Story />
+      </Route>
+      <Route exact path='/add' component={AddStory}/>
       </div>
 
     </>

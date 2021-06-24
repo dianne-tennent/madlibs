@@ -1,9 +1,11 @@
 const connection = require('./connection')
 
-function getFruits (db = connection) {
-  return db('fruit').select()
+function getStoryByName (storyName, db = connection) {
+  return db('stories')
+  .where('story_name', storyName)
+  .select()
 }
 
 module.exports = {
-  getFruits
+  getStoryByName
 }

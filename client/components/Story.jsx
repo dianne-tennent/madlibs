@@ -1,24 +1,37 @@
 import React, { useState, useEffect } from 'react'
+import { useParams, useHistory } from 'react-router-dom'
 import { connect } from "react-redux";
-import { wordTagger, tagValidator, validateWordTypes } from '../utils/posHandlers'
-import { resetWordList, setOriginalStoryArray, addNewWordToReplacementList, replaceWordsInStory, replaceWordInWordList } from '../actions/index'
+import { wordTagger, validateWordTypes } from '../utils/posHandlers'
+import { resetWordList, grabStoryFromDatabase, addNewWordToReplacementList, replaceWordsInStory, replaceWordInWordList } from '../actions/index'
 
 function Story(props) {
 
-let [ selectedWordList, setSelectedWordList ] = useState([])
-let [ error, setError ] = useState('')
-let [ submissionErrors, setSubmissionErrors ] = useState([])
-let [ formData, setFormData ] = useState([])
-let [ newWord, setNewWord ] = useState([])
-let [ userGeneratedWordList, setUserGeneratedWordList ] = useState([])
+    let history = useHistory()
 
-const originalStory = 'This is some sample text. This text can contain multiple beautiful sentences.'
-let originalStoryArray = originalStory.split(' ')
-originalStoryArray = originalStoryArray.map(element => element.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,""))
+    let { story } = useParams();
+    console.log("params", story)
+
+    let [ storyTitle, setStoryTitle ] = useState('')
 
 useEffect(() => {
-    props.dispatch(setOriginalStoryArray(originalStoryArray))
-}, [])
+
+
+    if(story === 'user_input') {
+        return
+    } else {
+        if(story === 'love_letter') {
+            setStoryTitle('Love Letter')
+        } else if(story === 'letter_to_the_editor') {
+            setStoryTitle('Letter to the Editor')
+        } else if(story === 'job_application') {
+            setStoryTitle('Job Application')
+        } 
+        props.dispatch(grabStoryFromDatabase(story))
+}}, [])
+
+let [ selectedWordList, setSelectedWordList ] = useState([])
+let [ error, setError ] = useState(null)
+let [ submissionErrors, setSubmissionErrors ] = useState([])
 
 const addToWordList = (word) => {
     let wordToAdd = wordTagger(word, selectedWordList, props.madlibs.story)
@@ -65,40 +78,61 @@ console.log(thisWord)
         if(Array.isArray(errors)) {
             setSubmissionErrors(errors)
             props.dispatch(resetWordList())
+        } else if(props.madlibs.wordList.length === 0) {
+            setError(`You haven't entered any words!`)
+            return
         } else {
             props.dispatch(replaceWordsInStory())
-            props.history.push('/output')
+            history.push('/output')
         }
-
+        errors = null
+        return errors
     }
 
     return (
         <>
-        <div>
-            <h1>Story</h1>
-            {originalStoryArray.map((word, i) => {
-                return <button key={i} onClick={() => addToWordList(word)}>{word}</button>
-            })}
-            <p>{error}</p>
-            {selectedWordList.length > 0 && selectedWordList.map((item, i) => (
-            <form>
-                <label key={100 + i} htmlFor={item.pos}>{item.pos}</label>
-                <input 
-                key={200 + i}
-                type='text' 
-                id={item.storyArrayIndexes} 
-                name={item.word} 
-                onBlur={(e) => blurHandler(e, item.storyArrayIndexes, item.pos)}/>
-            </form>
-            ))}
-            <ul>
-            {submissionErrors.map(element => (
-                <li>{element}</li>
-            )
-            )}
-            </ul>
-            <button onClick={() => submitMadLib()}>Show me my MadLib!</button>
-        </div>
+            <div className="header">
+                <h1>{storyTitle}</h1>
+            </div>
+
+            <div className="story-body">
+                <div className="instructions">
+                    <p>Choose words from the story</p>
+                    <p>Click 'hide story' - Sssssh keep it a secret!</p>
+                    <p>Get a friend to type new words into the input fields below</p>
+                    <p>Click 'Show me my Madlib' to see the result!</p>
+                </div>
+                <div className="errors">
+                    <p>{error && error}</p>
+                    <ul>
+                        {submissionErrors && submissionErrors.map(element => (
+                            <li>{element}</li>
+                        )
+                        )}
+                    </ul>
+                </div>
+                <div className="input-list">
+                    {selectedWordList.length > 0 && selectedWordList.map((item, i) => (
+                    <form>
+                        <label key={100 + i} htmlFor={item.pos}>{item.pos}</label>
+                        <input
+                        key={200 + i}
+                        type='text'
+                        id={item.storyArrayIndexes}
+                        name={item.word}
+                        onBlur={(e) => blurHandler(e, item.storyArrayIndexes, item.pos)}/>
+                    </form>
+                    ))}
+
+                </div>
+                <div className="story-text">
+                    {props.madlibs.story.map((word, i) => {
+                        return <button key={i} onClick={() => addToWordList(word)}>{word}</button>
+                    })}
+                </div>
+
+                <div className="confirm"><button onClick={() => submitMadLib()}>Show me my MadLib!</button></div>
+            </div>
         </>
     )
 }
