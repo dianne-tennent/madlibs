@@ -20,12 +20,14 @@ function AddStory(props) {
     }
     return (
         <div className="story-body">
-                <label htmlFor='userStory'>Enter your story here:</label>
-                    <textarea 
-                    id="userStory"
-                    name="userStory"
-                    onBlur={(e) => blurHandler(e)}></textarea>
-                    <button type="submit" onClick={(e) => submitHandler(e)}>Confirm</button>
+                <div className="user-story-input">
+                    <label htmlFor='userStory'>Enter your story here:</label>
+                        <textarea
+                        id="userStory"
+                        name="userStory"
+                        onBlur={(e) => blurHandler(e)}></textarea>
+                        <button type="submit" onClick={(e) => submitHandler(e)}>Confirm</button>
+                </div>
         </div>
     )
 }

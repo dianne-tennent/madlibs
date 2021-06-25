@@ -38,6 +38,7 @@
     ]
   },
   "dependencies": {
+    "classnames": "^2.3.1",
     "express": "^4.17.1",
     "knex": "^0.21.12",
     "pg": "^8.5.1",

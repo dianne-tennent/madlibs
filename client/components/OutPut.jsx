@@ -11,14 +11,14 @@ function OutPut(props) {
     return (
       <>
             <div className="header">
-              <h1>Your new story</h1>
+              <h1>Your Madlib</h1>
             </div>
             <div className="story-body">
               <div className="story-output">
                 <p>{props.madlibs.newStory.join(" ")}</p>
               </div>
+            <div className="confirm"><button onClick={() => navigate()}>Play again!</button></div>
             </div>
-            <button onClick={() => navigate()}>Play again!</button>
       </>
     )
 }

@@ -1,15 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Rambla:ital,wght@1,700&family=Roboto:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Padauk&family=Rambla:ital,wght@1,700&display=swap');
 html, body {
     margin: auto;
     width: 100%;
     display: flex;
     justify-content: center;
     background-color: #F3f3fc;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Padauk', sans-serif;
 }
 
 .container {
-    max-width: 800px;
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -17,13 +16,13 @@ html, body {
 
 .header {
     font-family: 'Rambla', sans-serif;
-    background-color: rgba(61, 205, 168, 0.8);
+    background-color: white;
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 40px 40px 20px 40px;
-    padding: 40px;
-    font-size: 50px;
+    padding: 50px;
+    font-size: 40px;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
 
@@ -32,7 +31,7 @@ html, body {
 }
 
 .menu {
-    background-color: rgba(61, 205, 168, 0.8);
+    background-color: white;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -41,37 +40,56 @@ html, body {
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
 
-.menu button {
+.menu button, .confirm button, .instructions button {
     font-family: 'Rambla', sans-serif;
     background-color: rgba(252, 193, 72, 0.8);
-    width: 80%;
+    padding: 15px 25px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
     border: none;
+    border-radius: 10px;
+    box-shadow: 0 9px #999;
+    width: 60%;
     margin: 20px;
     font-size: 40px;
-    padding: 40px;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
 
-.menu button:hover {
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+.menu button:active, .confirm button:active, .instructions button:active {
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
 }
 
 .story-body {
-    background-color: rgba(61, 205, 168, 0.8);
+    background-color: white;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     margin: 20px 40px 40px 40px;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    max-width: 800px;
 }
 
-.story-text {
+.left-column {
+    width: 60%;
+} 
+
+.right-column {
+    width: 40%;
+}
+
+.story_text {
+    background-color: white;
     display: flex;
     flex-flow: row wrap;
-    justify-content: space-evenly;
+    justify-content: flex-start;
+    padding: 15px;
 }
 
-.story-text button {
+.hidden {
+    display: none;
+}
+
+.story_text button {
+    background-color: #F561F1;
     font-size: 20px;
     padding: 10px;
     margin: 10px;
@@ -79,18 +97,18 @@ html, body {
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
 
-.story-text button:hover {
+.story_text button:hover {
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
 
 .input-list {
-    background-color: white;
     display: flex;
     flex-direction: column;
     justify-content: left;
     font-size: 30px;
     margin: 10px 70px;
     padding: 30px;
+    border: 1px solid black;
 }
 
 .input-list input, select {
@@ -106,7 +124,7 @@ html, body {
 
 .errors {
     display: flex;
-    background-color: white;
+    border: 1px solid black;
     color: red;
     font-size: 24px;
     font-weight: bold;
@@ -116,11 +134,9 @@ html, body {
 
 .instructions {
     display: flex;
-    background-color: white;
     font-size: 24px;
     font-weight: bold;
-    padding: 20px;
-    margin: 30px;
+    padding: 15px;
     flex-direction: column;
 }
 
@@ -130,25 +146,21 @@ html, body {
     align-items: center;
 }
 
-.confirm button {
-    font-family: 'Rambla', sans-serif;
-    background-color: #fcc148;
-    width: 80%;
-    border: none;
-    margin: 20px;
-    font-size: 40px;
-    padding: 20px;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-}
-
-.confirm button:hover {
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-}
-
 .story-output {
+    background-color: white;
     font-size: 26px;
     line-height: 40px;
-    background-color: white;
     padding: 30px;
+}
+
+.user-story-input textarea {
+        width: 100%;
+        height: 150px;
+        padding: 12px 20px;
+        box-sizing: border-box;
+        border: 2px solid #ccc;
+        border-radius: 4px;
+        background-color: #f8f8f8;
+        resize: none;
 }
 

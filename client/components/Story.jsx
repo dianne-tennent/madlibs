@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useParams, useHistory } from 'react-router-dom'
 import { connect } from "react-redux";
+import classNames from "classnames";
 import { wordTagger, validateWordTypes } from '../utils/posHandlers'
 import { resetWordList, grabStoryFromDatabase, addNewWordToReplacementList, replaceWordsInStory, replaceWordInWordList } from '../actions/index'
 
@@ -14,8 +15,6 @@ function Story(props) {
     let [ storyTitle, setStoryTitle ] = useState('')
 
 useEffect(() => {
-
-
     if(story === 'user_input') {
         return
     } else {
@@ -32,6 +31,7 @@ useEffect(() => {
 let [ selectedWordList, setSelectedWordList ] = useState([])
 let [ error, setError ] = useState(null)
 let [ submissionErrors, setSubmissionErrors ] = useState([])
+let [ hide, setHide ] = useState(false)
 
 const addToWordList = (word) => {
     let wordToAdd = wordTagger(word, selectedWordList, props.madlibs.story)
@@ -86,7 +86,10 @@ console.log(thisWord)
             history.push('/output')
         }
         errors = null
-        return errors
+    }
+
+    const hideToggle = () => {
+        setHide(!hide)
     }
 
     return (
@@ -96,42 +99,54 @@ console.log(thisWord)
             </div>
 
             <div className="story-body">
-                <div className="instructions">
-                    <p>Choose words from the story</p>
-                    <p>Click 'hide story' - Sssssh keep it a secret!</p>
-                    <p>Get a friend to type new words into the input fields below</p>
-                    <p>Click 'Show me my Madlib' to see the result!</p>
-                </div>
-                <div className="errors">
-                    <p>{error && error}</p>
-                    <ul>
-                        {submissionErrors && submissionErrors.map(element => (
-                            <li>{element}</li>
-                        )
-                        )}
-                    </ul>
-                </div>
-                <div className="input-list">
-                    {selectedWordList.length > 0 && selectedWordList.map((item, i) => (
-                    <form>
-                        <label key={100 + i} htmlFor={item.pos}>{item.pos}</label>
-                        <input
-                        key={200 + i}
-                        type='text'
-                        id={item.storyArrayIndexes}
-                        name={item.word}
-                        onBlur={(e) => blurHandler(e, item.storyArrayIndexes, item.pos)}/>
-                    </form>
-                    ))}
 
-                </div>
-                <div className="story-text">
-                    {props.madlibs.story.map((word, i) => {
-                        return <button key={i} onClick={() => addToWordList(word)}>{word}</button>
-                    })}
+                <div className="left-column">
+                    <div className="instructions">
+                        <ol>
+                            <li>Choose words from the story below</li>
+                            <li>Click 'hide story' - Sssssh keep it a secret!</li>
+                            <li>Get a friend to type new words into the input fields below</li>
+                            <li>Click 'Show me my Madlib' to see the result!</li>
+                        </ol>
+
+                    <button style={{'margin': 'auto'}} onClick={() => hideToggle()}>{hide === true ? 'Show story' : 'Hide story'}</button>
+                    </div>
+                    <div className={classNames({
+                        story_text: true,
+                        hidden: hide
+                    })}>
+                        {props.madlibs.story.map((word, i) => {
+                            return <button key={i} onClick={() => addToWordList(word)}>{word}</button>
+                        })}
+                    </div>
+                    <div className="confirm"><button onClick={() => submitMadLib()}>Show me my MadLib!</button></div>
                 </div>
 
-                <div className="confirm"><button onClick={() => submitMadLib()}>Show me my MadLib!</button></div>
+                <div className="right-column">
+                    <div className="errors">
+                        <p>{error && error}</p>
+                        <ul>
+                            {submissionErrors && submissionErrors.map(element => (
+                                <li>{element}</li>
+                            )
+                            )}
+                        </ul>
+                    </div>
+                    <div className="input-list">
+                        {selectedWordList.length > 0 && selectedWordList.map((item, i) => (
+                        <form>
+                            <label key={100 + i} htmlFor={item.pos}>{item.pos}</label>
+                            <input
+                            key={200 + i}
+                            type='text'
+                            id={item.storyArrayIndexes}
+                            name={item.word}
+                            onBlur={(e) => blurHandler(e, item.storyArrayIndexes, item.pos)}/>
+                        </form>
+                        ))}
+                    </div>
+                </div>
+
             </div>
         </>
     )
