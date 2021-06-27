@@ -31,33 +31,13 @@ This repo includes:
 
 ## Love Letter
 
-To my dearest Joseph, It has been 4 days since we last saw each other and I cannot stop thinking about you. Your 
+To my dearest Joseph, It has been 4 days since we last saw each other and I cannot stop thinking about you. Your shining eyes will remain forever in my memory. The way you spoke so softly and held my hand made me feel so warm inside. I know our love is forbidden, but I don't care what anyone says. I will love you forever. I've left a note in your locker. Meet me in the hallway after class tomorrow. Yours truly, Sarah.
 
-beautiful - 0 - adjective
+## Letter to the Editor
+Dear Editor, I'm very disappointed about your recent article explaining that young people are going off the rails. This is not true at all. My friends and I are working hard at school and playing sport on the weekends. We are very busy people. We also have to deal with our parents. You can imagine, it's a difficult time. We would appreciate it if you didn't pubicly damage our reputation. Kind regards, Tony. 
 
-eyes - 1 - noun 
-
-will remain forever in my memory, like shining 
-
-orbs of light - 2 - noun 
-
-they pierce my dreams. The way you 
-
-spoke - 3 - verb (past tense)
-
-so softly and held my hand made me feel so warm inside. I can't remember what we talked about, but only that we talked for hours. I know our love is 
-
-forbidden - 4 - adjective
-
-, but I don't care what anyone says. I will 
-
-love - 5 - verb (present simple tense)
-
-you forever. I've left a note in your locker. Meet me in the hallway after class tomorrow. Yours 
-
-truly - 6 - adverb
-
-, Sarah
+## Job Application
+To Whom It May Concern, I'm writing to apply for the front desk position you have advertised. I believe I would be a great candidate because I have excellent communication skills, good attention to detail and I am very reliable. I have experience working at a small office for my mother's accounting firm. Please find my CV attached. Feel free to contact me if you have any questions. Kind regards, Steve.
 
 ## Parts of speech codes from npm tagger
 JJ Adjective                big

@@ -3,7 +3,8 @@ import {
     SET_STORY, 
     RESET_WORD_LIST,
     ADD_NEW_WORD,
-    REPLACE_WORD_IN_LIST
+    REPLACE_WORD_IN_LIST,
+    TAG_NEW_WORDS
  } from '../actions'
 
 const initialState = {
@@ -28,19 +29,29 @@ const madlibs = (state = initialState, action) => {
             })
         return {...state, wordList: wordListCopy}
     case SET_STORY:
-        let storyArray = action.story.split(' ')
+        let storyArray = action.story.story_text.split(' ')
+        console.log(storyArray)
         storyArray = storyArray.map(element => element.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,""))
-        let storyState = {...state, story: storyArray}
+        let storyState = {...state, story: {title: action.story.story_title, storyArray}}
       return storyState
     case RESET_WORD_LIST:
-        state.wordList = []
-        return state
+        return {...state, wordList: []}
     case REPLACE_WORDS_IN_STORY:
         console.log(state.story)
         console.log(state.wordList)
-        let newStoryArray = replaceWords(state.story, state.wordList)
+        let newStoryArray = replaceWords(state.story.storyArray, state.wordList)
         state.newStory = [...newStoryArray]
         return state
+    case TAG_NEW_WORDS:
+        let mutableState = state
+        let newArray = mutableState.newStory.map((item) => {
+            if(state.wordList.some(element => element.word === item)) {
+                return {word: item, newWord: true}
+            } else {
+                return {word: item}
+            }
+        })
+        return {...mutableState, newStory: newArray}
     default:
       return state
   }

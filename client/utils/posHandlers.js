@@ -30,11 +30,11 @@ const tagList = [{
 }, 
 {
     tag: 'NN',
-    pos: 'noun (singular)'
+    pos: 'singular noun'
 },
 {
     tag: 'NNS',
-    pos: 'noun (plural)'
+    pos: 'plural noun'
 },
 {
     tag: 'RB',

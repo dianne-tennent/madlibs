@@ -6,7 +6,7 @@ export function getStoryByName (storyName) {
   console.log("api request", storyName)
   return request.get(rootUrl + '/' + storyName)
     .then(res => {
-      return res.body[0].story_text
+      return res.body
     })
     .catch(err => console.log(err))
 }

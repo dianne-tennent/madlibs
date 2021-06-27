@@ -1,10 +1,17 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from "react-redux";
 import { useHistory } from 'react-router-dom'
+import { resetWordList, tagNewWords } from '../actions/index'
+import classNames from 'classnames'
 
 function OutPut(props) {
 
+  useEffect(() => {
+    props.dispatch(tagNewWords())
+  }, [])
+
   const navigate = () => {
+    props.dispatch(resetWordList())
     props.history.push('/choose')
   }
 
@@ -15,7 +22,11 @@ function OutPut(props) {
             </div>
             <div className="story-body">
               <div className="story-output">
-                <p>{props.madlibs.newStory.join(" ")}</p>
+                {props.madlibs.newStory.map((item, i) => {
+                  return <>
+                  <span className={item.newWord === true ? 'arrow-highlight' : ''}>{item.word}</span><span> </span>
+                </>
+              })}
               </div>
             <div className="confirm"><button onClick={() => navigate()}>Play again!</button></div>
             </div>

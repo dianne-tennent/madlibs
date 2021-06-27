@@ -9,7 +9,7 @@ html, body {
 }
 
 .container {
-    height: 100vh;
+    height: 100%;
     display: flex;
     flex-direction: column;
 }
@@ -20,10 +20,12 @@ html, body {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     margin: 40px 40px 20px 40px;
     padding: 50px;
     font-size: 40px;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    text-align: center;
 }
 
 .header h1 {
@@ -63,7 +65,7 @@ html, body {
 .story-body {
     background-color: white;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     margin: 20px 40px 40px 40px;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
@@ -74,6 +76,11 @@ html, body {
 
 .right-column {
     width: 40%;
+}
+
+.story-workspace {
+    display: flex;
+    flex-direction: row;
 }
 
 .story_text {
@@ -89,8 +96,9 @@ html, body {
 }
 
 .story_text button {
-    background-color: #F561F1;
-    font-size: 20px;
+    background-color: white;
+    font-size: 26px;
+    font-family: 'Padauk', sans-serif;
     padding: 10px;
     margin: 10px;
     border: none;
@@ -108,7 +116,6 @@ html, body {
     font-size: 30px;
     margin: 10px 70px;
     padding: 30px;
-    border: 1px solid black;
 }
 
 .input-list input, select {
@@ -123,13 +130,40 @@ html, body {
 }
 
 .errors {
-    display: flex;
-    border: 1px solid black;
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.error-content {
     color: red;
-    font-size: 24px;
-    font-weight: bold;
+    font-size: 30px;
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
     padding: 20px;
-    margin: 30px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 34px;
+    font-weight: bold;
+  }
+  
+.close:hover, .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
 }
 
 .instructions {
@@ -138,6 +172,11 @@ html, body {
     font-weight: bold;
     padding: 15px;
     flex-direction: column;
+    width: 100%;
+}
+
+.instructions p {
+    width: 95%;
 }
 
 .confirm {
@@ -162,5 +201,43 @@ html, body {
         border-radius: 4px;
         background-color: #f8f8f8;
         resize: none;
+        font-family: 'Padauk', sans-serif;
+        font-size: 24px;
 }
 
+.user-story-input {
+    margin: auto;
+    width: 80%;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+.user-input-area {
+    margin: 40px;
+}
+
+.user-input-area label {
+    font-size: 24px;
+}
+
+@media (max-width: 400px) {
+    .story-workspace {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .left-column {
+        width: 100%;
+    } 
+    
+    .right-column {
+        width: 100%;
+    }
+}
+
+.arrow-highlight {
+    background-color:#FF6EC7;
+    padding:0.1em 0.2em;
+    margin: 0 0.1em;
+}

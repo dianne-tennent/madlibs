@@ -12,30 +12,23 @@ function Story(props) {
     let { story } = useParams();
     console.log("params", story)
 
-    let [ storyTitle, setStoryTitle ] = useState('')
-
 useEffect(() => {
     if(story === 'user_input') {
         return
     } else {
-        if(story === 'love_letter') {
-            setStoryTitle('Love Letter')
-        } else if(story === 'letter_to_the_editor') {
-            setStoryTitle('Letter to the Editor')
-        } else if(story === 'job_application') {
-            setStoryTitle('Job Application')
-        } 
-        props.dispatch(grabStoryFromDatabase(story))
+        return props.dispatch(grabStoryFromDatabase(story))
 }}, [])
 
 let [ selectedWordList, setSelectedWordList ] = useState([])
 let [ error, setError ] = useState(null)
 let [ submissionErrors, setSubmissionErrors ] = useState([])
-let [ hide, setHide ] = useState(false)
+let [ hide, setHide ] = useState(true)
+let [ modalDisplay, setModalDisplay ] = useState('none')
 
 const addToWordList = (word) => {
-    let wordToAdd = wordTagger(word, selectedWordList, props.madlibs.story)
+    let wordToAdd = wordTagger(word, selectedWordList, props.madlibs.story.storyArray)
     if (wordToAdd.hasOwnProperty('errorMessage')) {
+        setModalDisplay('block')
         return setError(wordToAdd.errorMessage)
     } else {
         console.log("Selected word". wordToAdd)
@@ -73,13 +66,16 @@ if(replace === false) {
 console.log(thisWord)
 }
 
-    const submitMadLib = () => {
+    const submitMadLib = (e) => {
+        e.preventDefault()
         let errors = validateWordTypes(props.madlibs.wordList)
         if(Array.isArray(errors)) {
             setSubmissionErrors(errors)
+            setModalDisplay('block')
             props.dispatch(resetWordList())
         } else if(props.madlibs.wordList.length === 0) {
             setError(`You haven't entered any words!`)
+            setModalDisplay('block')
             return
         } else {
             props.dispatch(replaceWordsInStory())
@@ -95,12 +91,11 @@ console.log(thisWord)
     return (
         <>
             <div className="header">
-                <h1>{storyTitle}</h1>
+                <h1>{props.madlibs.story.title}</h1>
             </div>
 
             <div className="story-body">
 
-                <div className="left-column">
                     <div className="instructions">
                         <ol>
                             <li>Choose words from the story below</li>
@@ -109,21 +104,43 @@ console.log(thisWord)
                             <li>Click 'Show me my Madlib' to see the result!</li>
                         </ol>
 
-                    <button style={{'margin': 'auto'}} onClick={() => hideToggle()}>{hide === true ? 'Show story' : 'Hide story'}</button>
                     </div>
-                    <div className={classNames({
-                        story_text: true,
-                        hidden: hide
-                    })}>
-                        {props.madlibs.story.map((word, i) => {
-                            return <button key={i} onClick={() => addToWordList(word)}>{word}</button>
-                        })}
+                    <div className="confirm"><button onClick={() => hideToggle()}>{hide === true ? 'Show story' : 'Hide story'}</button></div>
+                <div className="story-workspace">
+                    <div className="left-column">
+                        <div className={classNames({
+                            story_text: true,
+                            hidden: hide
+                        })}>
+                            {props.madlibs.story.storyArray && props.madlibs.story.storyArray.map((word, i) => {
+                                return <button key={i} onClick={() => addToWordList(word)}>{word}</button>
+                            })}
+                        </div>
                     </div>
-                    <div className="confirm"><button onClick={() => submitMadLib()}>Show me my MadLib!</button></div>
+                    <div className="right-column">
+                        <div className="input-list">
+                            {selectedWordList.length > 0 && selectedWordList.map((item, i) => (
+                                <form>
+                                <label key={100 + i} htmlFor={item.pos}>{item.pos}</label>
+                                <input
+                                key={200 + i}
+                                type='text'
+                                id={item.storyArrayIndexes}
+                                name={item.word}
+                                onBlur={(e) => blurHandler(e, item.storyArrayIndexes, item.pos)}/>
+                            </form>
+                            ))}
+                        </div>
+                    </div>
                 </div>
+                <div className="confirm"><button onClick={(e) => submitMadLib(e)}>Show me my MadLib!</button></div>
 
-                <div className="right-column">
-                    <div className="errors">
+            </div>
+            <div onClick={() => setModalDisplay('none')} className="errors" style={{'display': modalDisplay}}>
+                    
+
+                    <div className="error-content">
+                    <span className="close">&times;</span>
                         <p>{error && error}</p>
                         <ul>
                             {submissionErrors && submissionErrors.map(element => (
@@ -132,22 +149,7 @@ console.log(thisWord)
                             )}
                         </ul>
                     </div>
-                    <div className="input-list">
-                        {selectedWordList.length > 0 && selectedWordList.map((item, i) => (
-                        <form>
-                            <label key={100 + i} htmlFor={item.pos}>{item.pos}</label>
-                            <input
-                            key={200 + i}
-                            type='text'
-                            id={item.storyArrayIndexes}
-                            name={item.word}
-                            onBlur={(e) => blurHandler(e, item.storyArrayIndexes, item.pos)}/>
-                        </form>
-                        ))}
-                    </div>
                 </div>
-
-            </div>
         </>
     )
 }

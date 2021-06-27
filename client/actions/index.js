@@ -6,6 +6,7 @@ export const REPLACE_WORDS_IN_STORY = 'REPLACE_WORDS_IN_STORY'
 export const RESET_WORD_LIST = 'RESET_WORD_LIST'
 export const REPLACE_WORD_IN_LIST = 'REPLACE_WORD_IN_LIST'
 export const SET_USER_GENERATED_STORY = 'SET_USER_GENERATED_STORY'
+export const TAG_NEW_WORDS = 'TAG_NEW_WORDS'
 
 export function addNewWordToReplacementList (newWord) {
   return {
@@ -40,11 +41,18 @@ export function replaceWordsInStory () {
   }
 }
 
+export function tagNewWords () {
+  return {
+    type: TAG_NEW_WORDS
+  }
+}
+
 //THUNK
 export function grabStoryFromDatabase (storyName) {
   return (dispatch) => {
     return getStoryByName(storyName)
     .then((storyText) => {
+      console.log(storyText)
       dispatch(setStory(storyText))
       return null
     })
