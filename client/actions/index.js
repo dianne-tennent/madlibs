@@ -52,7 +52,6 @@ export function grabStoryFromDatabase (storyName) {
   return (dispatch) => {
     return getStoryByName(storyName)
     .then((story) => {
-      console.log(story)
       dispatch(setStory(story))
       return null
     })

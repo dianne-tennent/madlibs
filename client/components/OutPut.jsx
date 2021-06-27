@@ -23,7 +23,6 @@ function OutPut(props) {
             <div className="story-body">
               <div className="story-output">
                 {props.madlibs.newStory.map((item, i) => {
-                  console.log("item.word.newWord=true", item.word.newWord === true)
                   return <>
                   <span className={item.newWord == true ? 'arrow-highlight' : ''}>{item.word.word}</span><span>{item.word.punc} </span>
                 </>

@@ -8,9 +8,7 @@ import { resetWordList, grabStoryFromDatabase, addNewWordToReplacementList, repl
 function Story(props) {
 
     let history = useHistory()
-
     let { story } = useParams();
-    console.log("params", story)
 
 useEffect(() => {
     if(story === 'user_input') {
@@ -31,9 +29,7 @@ const addToWordList = (word) => {
         setModalDisplay('block')
         return setError(wordToAdd.errorMessage)
     } else {
-        console.log("Selected word". wordToAdd)
         setSelectedWordList([...selectedWordList, wordToAdd])
-        console.log(selectedWordList)
     }
 }
 
@@ -156,7 +152,6 @@ console.log(thisWord)
 
 function mapStateToProps(state) {
     return {
-      list: state.list,
       madlibs: state.madlibs
     };
   }

@@ -26,35 +26,35 @@ let tagger = new pos.Tagger();
 
 const tagList = [{
     tag: 'JJ',
-    pos: 'adjective'
+    pos: 'adjective e.g. beautiful, scary, strange'
 }, 
 {
     tag: 'NN',
-    pos: 'singular noun'
+    pos: 'singular noun, e.g. lamp, chair, trophy'
 },
 {
     tag: 'NNS',
-    pos: 'plural noun'
+    pos: 'plural noun e.g. diamonds, handshakes, motorbikes'
 },
 {
     tag: 'RB',
-    pos: 'adverb'
+    pos: 'adverb e.g. sneakily, swiftly, abruptly'
 },
 {
     tag: 'VB',
-    pos: 'verb (base form, e.g. eat, sleep)'
+    pos: 'verb (base form, e.g. eat, sleep, dance)'
 },
 {
     tag: 'VBP',
-    pos: 'verb (present tense, e.g. eat, sleep)'
+    pos: 'verb (present tense, e.g. eat, sleep, dance)'
 },
 {
     tag: 'VBD',
-    pos: 'verb (past tense, e.g. ate, slept)'
+    pos: 'verb (past tense, e.g. ate, slept, danced)'
 },
 {
     tag: 'VBG',
-    pos: 'verb (gerund, e.g. eating, sleeping)'
+    pos: 'verb (gerund, e.g. eating, sleeping, dancing)'
 }]
 
 function wordTagger(word, wordList, storyArray) {
