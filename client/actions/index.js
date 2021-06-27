@@ -51,9 +51,9 @@ export function tagNewWords () {
 export function grabStoryFromDatabase (storyName) {
   return (dispatch) => {
     return getStoryByName(storyName)
-    .then((storyText) => {
-      console.log(storyText)
-      dispatch(setStory(storyText))
+    .then((story) => {
+      console.log(story)
+      dispatch(setStory(story))
       return null
     })
     .catch((err) => {

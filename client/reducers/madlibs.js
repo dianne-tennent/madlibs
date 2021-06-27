@@ -29,9 +29,24 @@ const madlibs = (state = initialState, action) => {
             })
         return {...state, wordList: wordListCopy}
     case SET_STORY:
+        const punctuation = '!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~';
         let storyArray = action.story.story_text.split(' ')
         console.log(storyArray)
-        storyArray = storyArray.map(element => element.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,""))
+            //if a word has punctuation, move to a separate key-value pair punc: ''
+            storyArray = storyArray.map(element => {
+                let punc = ''
+                let characters = element.split('')
+                    if(punctuation.includes(characters[characters.length - 1])) {
+                        punc = characters[characters.length - 1]
+                    }
+                characters = characters.join('')
+                characters = characters.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"")
+                element = {word: characters, punc}
+                return element
+            })
+            console.log(storyArray)
+
+        //storyArray = storyArray.map(element => element.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,""))
         let storyState = {...state, story: {title: action.story.story_title, storyArray}}
       return storyState
     case RESET_WORD_LIST:
@@ -45,10 +60,12 @@ const madlibs = (state = initialState, action) => {
     case TAG_NEW_WORDS:
         let mutableState = state
         let newArray = mutableState.newStory.map((item) => {
-            if(state.wordList.some(element => element.word === item)) {
+            if(state.wordList.some(element => element.word === item.word)) {
+                console.log({word: item, newWord: true})
                 return {word: item, newWord: true}
             } else {
-                return {word: item}
+                console.log({word: item, newWord: false})
+                return {word: item, newWord: false}
             }
         })
         return {...mutableState, newStory: newArray}
@@ -68,8 +85,8 @@ function replaceWords (storyArray, list) {
             //TODO: adjust for multiple indexes
             for(let k=0;k<list[j].index.length;k++) {
                 if(i == list[j].index[k]) {
-                    console.log(list[j].word)
-                    newStoryArray.splice(i, 1, list[j].word)
+                    newStoryArray[i].word = list[j].word
+                    console.log(newStoryArray[i])
                 }
             }
 

@@ -67,7 +67,7 @@ function wordTagger(word, wordList, storyArray) {
     } else {
         let indexes = []
         storyArray.forEach((item, i) => {
-            if(item === newWord) {
+            if(item.word === newWord) {
                 indexes.push(i)
             }
         })

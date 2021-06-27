@@ -112,8 +112,8 @@ console.log(thisWord)
                             story_text: true,
                             hidden: hide
                         })}>
-                            {props.madlibs.story.storyArray && props.madlibs.story.storyArray.map((word, i) => {
-                                return <button key={i} onClick={() => addToWordList(word)}>{word}</button>
+                            {props.madlibs.story.storyArray && props.madlibs.story.storyArray.map((element, i) => {
+                                return <button key={i} onClick={() => addToWordList(element.word)}>{element.word}</button>
                             })}
                         </div>
                     </div>

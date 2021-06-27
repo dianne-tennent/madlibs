@@ -44,7 +44,7 @@ html, body {
 
 .menu button, .confirm button, .instructions button {
     font-family: 'Rambla', sans-serif;
-    background-color: rgba(252, 193, 72, 0.8);
+    background-color: #FF6EC7;
     padding: 15px 25px;
     text-align: center;
     cursor: pointer;
@@ -237,7 +237,7 @@ html, body {
 }
 
 .arrow-highlight {
-    background-color:#FF6EC7;
+    background-color:rgba(252, 193, 72, 0.8);
     padding:0.1em 0.2em;
     margin: 0 0.1em;
 }
