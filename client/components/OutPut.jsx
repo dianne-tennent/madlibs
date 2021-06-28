@@ -18,6 +18,7 @@ function OutPut(props) {
     return (
       <>
             <div className="header">
+              <img src={props.madlibs.story.image} />
               <h1>Your Madlib!</h1>
             </div>
             <div className="story-body">

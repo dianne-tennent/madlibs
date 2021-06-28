@@ -12,7 +12,7 @@ function HowToPlay (props) {
     <>
       
 
-        <div className="header">
+        <div className="home-header">
           <h1>How to play</h1>
         </div>
 

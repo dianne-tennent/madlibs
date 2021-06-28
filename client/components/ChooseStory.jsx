@@ -4,7 +4,7 @@ function ChooseStory(props) {
     return (
         <>
         <div>
-            <div className="header">
+            <div className="home-header">
                 <h1>Choose a story</h1>
             </div>
             <div className="menu">

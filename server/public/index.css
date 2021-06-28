@@ -1,10 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Padauk&family=Allerta+Stencil&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Kirang+Haerang&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Arvo&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Mali:wght@300&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Comic+Neue&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Jomhuria&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Allerta+Stencil&display=swap');
+
 html, body {
     margin: auto;
     width: 100%;
@@ -18,6 +13,20 @@ html, body {
     height: 100%;
     display: flex;
     flex-direction: column;
+}
+
+.home-header {
+    font-family: 'Allerta Stencil', sans-serif;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    margin: 40px 40px 20px 40px;
+    padding: 50px;
+    font-size: 40px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    text-align: center;
 }
 
 .header {
@@ -63,9 +72,9 @@ html, body {
     border: none;
     border-radius: 10px;
     box-shadow: 0 9px #999;
-    width: 60%;
     margin: 20px;
-    font-size: 40px;
+    font-size: 30px;
+    width: 60%;
 }
 
 .menu button:active, .confirm button:active, .instructions button:active {
@@ -78,6 +87,7 @@ html, body {
     display: flex;
     flex-direction: column;
     margin: 20px 40px 40px 40px;
+    padding: 10px;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
 
@@ -129,8 +139,7 @@ html, body {
     flex-direction: column;
     justify-content: left;
     font-size: 30px;
-    margin: 10px 70px;
-    padding: 30px;
+    padding: 15px;
 }
 
 .input-list input, select {
@@ -191,7 +200,14 @@ html, body {
 }
 
 .instructions p {
-    width: 95%;
+    width: 90%;
+    display: inline;
+    margin: 0 0 10px 0;
+}
+
+.instructions ol {
+    margin: 0;
+    padding: 0px 0px 0px 25px;
 }
 
 .confirm {
@@ -237,7 +253,11 @@ html, body {
     font-size: 24px;
 }
 
-@media (max-width: 400px) {
+@media (max-width: 500px) {
+    h1 {
+        font-size: 16vw;
+    }
+
     .story-workspace {
         display: flex;
         flex-direction: column;
@@ -250,6 +270,32 @@ html, body {
     .right-column {
         width: 100%;
     }
+
+    .menu button, .confirm button, .instructions button {
+        font-family: 'Allerta Stencil', sans-serif;
+        background-color: #FF6EC7;
+        padding: 15px 25px;
+        text-align: center;
+        cursor: pointer;
+        outline: none;
+        border: none;
+        border-radius: 10px;
+        box-shadow: 0 9px #999;
+        margin: 20px;
+        font-size: 5vw;
+        width: 60%;
+    }
+
+    .header h1 {
+        display: none;
+    }
+
+    .instructions li {
+        width: 90%;
+        font-size: 5vw;
+    }
+
+
 }
 
 .arrow-highlight {

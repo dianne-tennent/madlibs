@@ -9,7 +9,7 @@ function Home (props) {
 
   return (
     <>
-      <div className='header'>
+      <div className='home-header'>
       <h1>Let's Play Madlibs</h1>
       </div>
       <div className='menu'>
