@@ -1,4 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Padauk&family=Rambla:ital,wght@1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kirang+Haerang&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Arvo&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mali:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Comic+Neue&display=swap');
 html, body {
     margin: auto;
     width: 100%;
@@ -15,7 +19,7 @@ html, body {
 }
 
 .header {
-    font-family: 'Rambla', sans-serif;
+    font-family: 'Comic Neue', cursive;
     background-color: white;
     display: flex;
     justify-content: center;
@@ -43,7 +47,7 @@ html, body {
 }
 
 .menu button, .confirm button, .instructions button {
-    font-family: 'Rambla', sans-serif;
+    font-family: 'Comic Neue', cursive;
     background-color: #FF6EC7;
     padding: 15px 25px;
     text-align: center;
@@ -181,6 +185,7 @@ html, body {
 
 .confirm {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }

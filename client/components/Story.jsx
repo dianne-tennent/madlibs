@@ -101,8 +101,7 @@ console.log(thisWord)
                         </ol>
 
                     </div>
-                    <div className="confirm"><button onClick={() => hideToggle()}>{hide === true ? 'Show story' : 'Hide story'}</button></div>
-                <div className="story-workspace">
+                    <div className="story-workspace">
                     <div className="left-column">
                         <div className={classNames({
                             story_text: true,
@@ -129,7 +128,10 @@ console.log(thisWord)
                         </div>
                     </div>
                 </div>
-                <div className="confirm"><button onClick={(e) => submitMadLib(e)}>Show me my MadLib!</button></div>
+                <div className="confirm">
+                    <button onClick={() => hideToggle()}>{hide === true ? 'Show story' : 'Hide story'}</button>
+                    <button onClick={(e) => submitMadLib(e)}>Show me my MadLib!</button>
+                </div>
 
             </div>
             <div onClick={() => setModalDisplay('none')} className="errors" style={{'display': modalDisplay}}>

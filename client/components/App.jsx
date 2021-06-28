@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
-import { connect } from 'react-redux'
+import React from 'react'
+import { HashRouter as Router, Route } from 'react-router-dom'
 
 
 //components
@@ -11,7 +10,7 @@ import Story from './Story'
 import OutPut from './OutPut'
 import AddStory from './AddStory'
 
-function App (props) {
+function App () {
 
 
   return (
@@ -31,10 +30,6 @@ function App (props) {
     </>
   )
 }
-const mapStateToProps = (globalState) => {
-  return {
-    list: globalState.list
-  }
-}
 
-export default connect(mapStateToProps)(App)
+
+export default App
