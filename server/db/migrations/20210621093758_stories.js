@@ -5,7 +5,7 @@ exports.up = function(knex) {
         table.string('story_name')
         table.text('story_text')
         table.string('story_title')
-        table.integer('story_id')
+        table.string('story_image')
       })
 };
 

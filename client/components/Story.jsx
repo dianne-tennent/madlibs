@@ -3,7 +3,13 @@ import { useParams, useHistory } from 'react-router-dom'
 import { connect } from "react-redux";
 import classNames from "classnames";
 import { wordTagger, validateWordTypes } from '../utils/posHandlers'
-import { resetWordList, grabStoryFromDatabase, addNewWordToReplacementList, replaceWordsInStory, replaceWordInWordList } from '../actions/index'
+import { 
+    resetWordList, 
+    grabStoryFromDatabase, 
+    addNewWordToReplacementList, 
+    replaceWordsInStory, 
+    replaceWordInWordList, 
+    disableButton } from '../actions/index'
 
 function Story(props) {
 
@@ -30,6 +36,7 @@ const addToWordList = (word) => {
         return setError(wordToAdd.errorMessage)
     } else {
         setSelectedWordList([...selectedWordList, wordToAdd])
+        props.dispatch(disableButton(word))
     }
 }
 
@@ -87,6 +94,7 @@ console.log(thisWord)
     return (
         <>
             <div className="header">
+                <img src={props.madlibs.story.image}/>
                 <h1>{props.madlibs.story.title}</h1>
             </div>
 
@@ -108,7 +116,7 @@ console.log(thisWord)
                             hidden: hide
                         })}>
                             {props.madlibs.story.storyArray && props.madlibs.story.storyArray.map((element, i) => {
-                                return <button key={i} onClick={() => addToWordList(element.word)}>{element.word}</button>
+                                return <button disabled={element.disabled} key={i} onClick={() => addToWordList(element.word)}>{element.word}</button>
                             })}
                         </div>
                     </div>

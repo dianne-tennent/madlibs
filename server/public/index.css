@@ -1,8 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Padauk&family=Rambla:ital,wght@1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Padauk&family=Allerta+Stencil&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Kirang+Haerang&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Arvo&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Mali:wght@300&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Comic+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Jomhuria&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Allerta+Stencil&display=swap');
 html, body {
     margin: auto;
     width: 100%;
@@ -19,12 +21,12 @@ html, body {
 }
 
 .header {
-    font-family: 'Comic Neue', cursive;
+    font-family: 'Allerta Stencil', sans-serif;
     background-color: white;
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
+    flex-direction: row;
     margin: 40px 40px 20px 40px;
     padding: 50px;
     font-size: 40px;
@@ -34,6 +36,11 @@ html, body {
 
 .header h1 {
     margin: 0px;
+}
+
+.header img {
+    max-width: 120px;
+    margin-right: 20px;
 }
 
 .menu {
@@ -47,7 +54,7 @@ html, body {
 }
 
 .menu button, .confirm button, .instructions button {
-    font-family: 'Comic Neue', cursive;
+    font-family: 'Allerta Stencil', sans-serif;
     background-color: #FF6EC7;
     padding: 15px 25px;
     text-align: center;
@@ -111,6 +118,10 @@ html, body {
 
 .story_text button:hover {
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.story_text button:active {
+    transform: translateY(4px);
 }
 
 .input-list {

@@ -4,7 +4,8 @@ import {
     RESET_WORD_LIST,
     ADD_NEW_WORD,
     REPLACE_WORD_IN_LIST,
-    TAG_NEW_WORDS
+    TAG_NEW_WORDS,
+    DISABLE_BUTTON
  } from '../actions'
 
 const initialState = {
@@ -39,12 +40,12 @@ const madlibs = (state = initialState, action) => {
                     }
                 characters = characters.join('')
                 characters = characters.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"")
-                element = {word: characters, punc}
+                element = {word: characters, disabled: false, punc}
                 return element
             })
 
         //storyArray = storyArray.map(element => element.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,""))
-        let storyState = {...state, story: {title: action.story.story_title, storyArray}}
+        let storyState = {...state, story: {image: action.story.story_image, title: action.story.story_title, storyArray}}
       return storyState
     case RESET_WORD_LIST:
         return {...state, wordList: []}
@@ -62,6 +63,15 @@ const madlibs = (state = initialState, action) => {
             }
         })
         return {...mutableState, newStory: newArray}
+    case DISABLE_BUTTON:
+        let array = state.story.storyArray.map(element => {
+            if(element.word === action.word) {
+                element = {...element, disabled: true}
+            }
+            return element
+        })
+        state.story.storyArray = [...array]
+        return state
     default:
       return state
   }
