@@ -4,14 +4,19 @@ function ChooseStory(props) {
     return (
         <>
         <div>
-            <div className="home-header">
-                <h1>Choose a story</h1>
+            <div className="header">
+                <div className="home-icon-container">
+                    <img onClick={() => props.history.push('/')} src="/images/home.png"/>
+                </div>
+                <div className="heading-container">
+                    <h1>Choose a story</h1>
+                </div>
             </div>
             <div className="menu">
-                <button onClick={() => props.history.push('/add')}>Add my own</button>
-                <button onClick={() => props.history.push('/play/love_letter')}>Love Letter</button>
-                <button onClick={() => props.history.push('/play/job_application')}>Job Application</button>
-                <button onClick={() => props.history.push('/play/letter_to_the_editor')}>Letter to the Editor</button>
+                <button onClick={() => props.history.push('/add')}>Create my own!</button>
+                <button onClick={() => props.history.push('/play/love_letter')}><img className="story-image" src="/images/heart.png"/></button>
+                <button onClick={() => props.history.push('/play/job_application')}><img className="story-image" src="/images/resume.png"/></button>
+                <button onClick={() => props.history.push('/play/letter_to_the_editor')}><img className="story-image" src="/images/newspaper.png"/></button>
             </div>
         </div>
         </>

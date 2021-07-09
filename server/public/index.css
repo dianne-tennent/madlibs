@@ -7,74 +7,113 @@ html, body {
     justify-content: center;
     background-color: #F3f3fc;
     font-family: 'Padauk', sans-serif;
+    color: white;
 }
 
 .container {
-    height: 100%;
+    height: 100vh;
+    width: 70vw;
     display: flex;
     flex-direction: column;
 }
 
 .home-header {
     font-family: 'Allerta Stencil', sans-serif;
-    background-color: white;
+    height: 20vh;
+    background-color: #431b93;
+    color: white;
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: row;
-    margin: 40px 40px 20px 40px;
+    flex-direction: column;
     padding: 50px;
-    font-size: 40px;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    margin: 10px 0 0 0;
+    font-size: 20px;
     text-align: center;
+    border-radius: 10px;
+}
+
+.caption {
+    font-style: italic;
+    margin-bottom: 10px;
 }
 
 .header {
     font-family: 'Allerta Stencil', sans-serif;
-    background-color: white;
+    background-color: #431b93;
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: row;
-    margin: 40px 40px 20px 40px;
-    padding: 50px;
+    flex-direction: column;
+    margin: 10px 0 0 0;
+    padding: 20px 20px 40px 20px;
     font-size: 40px;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     text-align: center;
+    border-radius: 10px;
 }
 
-.header h1 {
+.home-icon-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.home-icon-container img {
+    width: 40px;
+    cursor: pointer;
+}
+
+.home-icon-container img:hover {
+    background-color: white;
+    border-radius: 5px;
+}
+
+.heading-container {
+    display: flex;
+}
+
+h1 {
     margin: 0px;
 }
 
-.header img {
+h3 {
+    font-family: 'Allerta Stencil', sans-serif;
+    margin: 0;
+}
+
+.story-image {
     max-width: 120px;
-    margin-right: 20px;
+    margin-left: 20px;
 }
 
 .menu {
-    background-color: white;
+    height: 65vh;
+    background-color: #0542b9;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
     justify-content: space-around;
     align-items: center;
-    margin: 20px 40px 40px 40px;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    margin: 10px 0 0 0;
+    border-radius: 10px;
 }
 
 .menu button, .confirm button, .instructions button {
+    color: white;
     font-family: 'Allerta Stencil', sans-serif;
-    background-color: #FF6EC7;
-    padding: 15px 25px;
+    background-color: #268903;
+    padding: 40px 25px;
     text-align: center;
     cursor: pointer;
     outline: none;
     border: none;
     border-radius: 10px;
     box-shadow: 0 9px #999;
-    margin: 20px;
     font-size: 30px;
-    width: 60%;
+    min-width: 40%;
+    min-height: 40%;
+    margin: 15px;
 }
 
 .menu button:active, .confirm button:active, .instructions button:active {
@@ -83,20 +122,14 @@ html, body {
 }
 
 .story-body {
-    background-color: white;
+    height: 65vh;
+    background-color: #0542b9;
     display: flex;
     flex-direction: column;
-    margin: 20px 40px 40px 40px;
+    margin: 10px 0 0 0;
     padding: 10px;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-}
-
-.left-column {
-    width: 60%;
-} 
-
-.right-column {
-    width: 40%;
+    border-radius: 10px;
+    overflow: auto;
 }
 
 .story-workspace {
@@ -105,11 +138,11 @@ html, body {
 }
 
 .story_text {
-    background-color: white;
     display: flex;
     flex-flow: row wrap;
     justify-content: flex-start;
     padding: 15px;
+    margin: auto;
 }
 
 .hidden {
@@ -120,14 +153,16 @@ html, body {
     background-color: white;
     font-size: 26px;
     font-family: 'Padauk', sans-serif;
-    padding: 10px;
+    padding: 0 10px;
     margin: 10px;
     border: none;
+    border-radius: 5px;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
 
 .story_text button:hover {
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    cursor: pointer;
 }
 
 .story_text button:active {
@@ -135,11 +170,22 @@ html, body {
 }
 
 .input-list {
-    display: flex;
-    flex-direction: column;
-    justify-content: left;
+    display: none;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     font-size: 30px;
-    padding: 15px;
+    background-color: rgba(0,0,0,0.9);
+    overflow: auto;
+}
+
+.input-list-content {
+    width: 80vw;
+    margin: auto;
+    padding: 50px;
 }
 
 .input-list input, select {
@@ -194,20 +240,24 @@ html, body {
     display: flex;
     font-size: 24px;
     font-weight: bold;
-    padding: 15px;
+    padding: 0 40px 20px 40px;
     flex-direction: column;
-    width: 100%;
+    width: 80%;
+    margin: 20px auto;
+    background-color: white;
+    color: black;
+    border-radius: 10px;
+}
+
+.instructions h2 {
+    text-align: center;
+    margin: 10px 0 0 0;
 }
 
 .instructions p {
     width: 90%;
     display: inline;
     margin: 0 0 10px 0;
-}
-
-.instructions ol {
-    margin: 0;
-    padding: 0px 0px 0px 25px;
 }
 
 .confirm {
@@ -218,7 +268,6 @@ html, body {
 }
 
 .story-output {
-    background-color: white;
     font-size: 26px;
     line-height: 40px;
     padding: 30px;
@@ -251,6 +300,17 @@ html, body {
 
 .user-input-area label {
     font-size: 24px;
+}
+
+.footer {
+    height: 2vh;
+    background-color: #F3f3fc;
+    color: black;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0;
 }
 
 @media (max-width: 500px) {
@@ -299,7 +359,8 @@ html, body {
 }
 
 .arrow-highlight {
-    background-color:rgba(252, 193, 72, 0.8);
+    background-color: #ff8601;
     padding:0.1em 0.2em;
     margin: 0 0.1em;
+    border-radius: 5px;
 }

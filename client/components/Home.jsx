@@ -10,7 +10,8 @@ function Home (props) {
   return (
     <>
       <div className='home-header'>
-      <h1>Let's Play Madlibs</h1>
+      <span className="caption">Wanna hear a funny story?</span>
+      <h1>Let's Play Madlibs!</h1>
       </div>
       <div className='menu'>
       <button onClick={() => navigate('/how')}>How?</button>

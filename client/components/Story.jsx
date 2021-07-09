@@ -26,17 +26,19 @@ useEffect(() => {
 let [ selectedWordList, setSelectedWordList ] = useState([])
 let [ error, setError ] = useState(null)
 let [ submissionErrors, setSubmissionErrors ] = useState([])
-let [ hide, setHide ] = useState(true)
-let [ modalDisplay, setModalDisplay ] = useState('none')
+let [ hide, setHide ] = useState(false)
+let [ errorDisplay, setErrorDisplay ] = useState('none')
+let [ inputDisplay, setInputDisplay ] = useState('none')
 
 const addToWordList = (word) => {
     let wordToAdd = wordTagger(word, selectedWordList, props.madlibs.story.storyArray)
     if (wordToAdd.hasOwnProperty('errorMessage')) {
-        setModalDisplay('block')
+        setErrorDisplay('block')
         return setError(wordToAdd.errorMessage)
     } else {
         setSelectedWordList([...selectedWordList, wordToAdd])
         props.dispatch(disableButton(word))
+        setInputDisplay('block')
     }
 }
 
@@ -65,8 +67,6 @@ props.madlibs.wordList.map(element => {
 if(replace === false) {
     props.dispatch(addNewWordToReplacementList(thisWord))
 }
-
-console.log(thisWord)
 }
 
     const submitMadLib = (e) => {
@@ -74,11 +74,11 @@ console.log(thisWord)
         let errors = validateWordTypes(props.madlibs.wordList)
         if(Array.isArray(errors)) {
             setSubmissionErrors(errors)
-            setModalDisplay('block')
+            setErrorDisplay('block')
             props.dispatch(resetWordList())
         } else if(props.madlibs.wordList.length === 0) {
             setError(`You haven't entered any words!`)
-            setModalDisplay('block')
+            setErrorDisplay('block')
             return
         } else {
             props.dispatch(replaceWordsInStory())
@@ -94,23 +94,28 @@ console.log(thisWord)
     return (
         <>
             <div className="header">
-                <img src={props.madlibs.story.image}/>
-                <h1>{props.madlibs.story.title}</h1>
+                <div className="home-icon-container">
+                    <img onClick={() => history.push('/')} src="/images/home.png"/>
+                </div>
+                <div className="heading-container">
+                    <h1>{props.madlibs.story.title}</h1>
+                    <img className="story-image" src={props.madlibs.story.image}/>
+                </div>
             </div>
 
             <div className="story-body">
 
                     <div className="instructions">
-                        <ol>
-                            <li>Choose words from the story below</li>
-                            <li>Click 'hide story' - Sssssh keep it a secret!</li>
-                            <li>Get a friend to type new words into the input fields below</li>
-                            <li>Click 'Show me my Madlib' to see the result!</li>
-                        </ol>
+                        <h2>How does it work?</h2>
+                            <h3>Step 1</h3>
+                            <p>Click to choose words from the story below.</p>
+                            <h3>Step 2</h3>
+                            <p>Type new words into the input fields.</p>
+                            <h3>Step 3</h3>
+                            <p>Click 'Show me my Madlib' to see the result!</p>
 
                     </div>
                     <div className="story-workspace">
-                    <div className="left-column">
                         <div className={classNames({
                             story_text: true,
                             hidden: hide
@@ -119,30 +124,35 @@ console.log(thisWord)
                                 return <button disabled={element.disabled} key={i} onClick={() => addToWordList(element.word)}>{element.word}</button>
                             })}
                         </div>
-                    </div>
-                    <div className="right-column">
-                        <div className="input-list">
-                            {selectedWordList.length > 0 && selectedWordList.map((item, i) => (
-                                <form>
-                                <label key={100 + i} htmlFor={item.pos}>{item.pos}</label>
-                                <input
-                                key={200 + i}
-                                type='text'
-                                id={item.storyArrayIndexes}
-                                name={item.word}
-                                onBlur={(e) => blurHandler(e, item.storyArrayIndexes, item.pos)}/>
-                            </form>
-                            ))}
+
+                        <div className="input-list" style={{'display': inputDisplay}}>
+                            <div className="input-list-content">
+                                <h2>These are the parts of speech you've selected so far:</h2>
+                                    {selectedWordList.length > 0 && selectedWordList.map((item, i) => (
+                                        <form>
+                                        <label key={100 + i} htmlFor={item.pos}>{item.pos}</label>
+                                        <input
+                                        key={200 + i}
+                                        type='text'
+                                        id={item.storyArrayIndexes}
+                                        name={item.word}
+                                        onBlur={(e) => blurHandler(e, item.storyArrayIndexes, item.pos)}/>
+                                    </form>
+                                    ))}
+                                    <div className="confirm">
+                                        <button onClick={() => setInputDisplay('none')}>Add more</button>
+                                        <button onClick={(e) => submitMadLib(e)}>Show me my MadLib!</button>
+                                    </div>
+                            </div>
                         </div>
-                    </div>
                 </div>
-                <div className="confirm">
+                {/* <div className="confirm">
                     <button onClick={() => hideToggle()}>{hide === true ? 'Show story' : 'Hide story'}</button>
                     <button onClick={(e) => submitMadLib(e)}>Show me my MadLib!</button>
-                </div>
+                </div> */}
 
             </div>
-            <div onClick={() => setModalDisplay('none')} className="errors" style={{'display': modalDisplay}}>
+            <div onClick={() => setErrorDisplay('none')} className="errors" style={{'display': errorDisplay}}>
                     
 
                     <div className="error-content">

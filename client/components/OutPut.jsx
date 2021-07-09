@@ -18,8 +18,13 @@ function OutPut(props) {
     return (
       <>
             <div className="header">
-              <img src={props.madlibs.story.image} />
-              <h1>Your Madlib!</h1>
+                <div className="home-icon-container">
+                    <img onClick={() => props.history.push('/')} src="/images/home.png"/>
+                </div>
+                <div className="heading-container">
+                    <h1>Your Madlib!</h1>
+                    <img className="story-image" src='/images/laughing-face-white.png' />
+                </div>
             </div>
             <div className="story-body">
               <div className="story-output">

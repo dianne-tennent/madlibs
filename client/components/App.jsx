@@ -9,6 +9,7 @@ import ChooseStory from './ChooseStory'
 import Story from './Story'
 import OutPut from './OutPut'
 import AddStory from './AddStory'
+import Footer from './Footer'
 
 function App () {
 
@@ -25,6 +26,8 @@ function App () {
       <Story />
       </Route>
       <Route exact path='/add' component={AddStory}/>
+      <Route path='/'>
+      <Footer /></Route>
       </div>
 
     </>
