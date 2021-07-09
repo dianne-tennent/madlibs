@@ -141,7 +141,7 @@ if(replace === false) {
                                     ))}
                                     <div className="confirm">
                                         <button onClick={() => setInputDisplay('none')}>Add more</button>
-                                        <button onClick={(e) => submitMadLib(e)}>Show me my MadLib!</button>
+                                        <button onClick={() => submitMadLib(e)}>Show me my MadLib!</button>
                                     </div>
                             </div>
                         </div>
