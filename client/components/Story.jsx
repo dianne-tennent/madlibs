@@ -99,14 +99,13 @@ if(replace === false) {
                 </div>
                 <div className="heading-container">
                     <h1>{props.madlibs.story.title}</h1>
-                    <img className="story-image" src={props.madlibs.story.image}/>
+                    <img className="story-image-header" src={props.madlibs.story.image}/>
                 </div>
             </div>
 
             <div className="story-body">
 
                     <div className="instructions">
-                        <h2>How does it work?</h2>
                             <h3>Step 1</h3>
                             <p>Click to choose words from the story below.</p>
                             <h3>Step 2</h3>
@@ -141,15 +140,15 @@ if(replace === false) {
                                     ))}
                                     <div className="confirm">
                                         <button onClick={() => setInputDisplay('none')}>Add more</button>
-                                        <button onClick={() => submitMadLib(e)}>Show me my MadLib!</button>
+                                        <button onClick={(e) => submitMadLib(e)}>Show me my MadLib!</button>
                                     </div>
                             </div>
                         </div>
                 </div>
-                {/* <div className="confirm">
-                    <button onClick={() => hideToggle()}>{hide === true ? 'Show story' : 'Hide story'}</button>
+                <div className="confirm">
+                    <button onClick={() => setInputDisplay('block')}>Show inputs</button>
                     <button onClick={(e) => submitMadLib(e)}>Show me my MadLib!</button>
-                </div> */}
+                </div>
 
             </div>
             <div onClick={() => setErrorDisplay('none')} className="errors" style={{'display': errorDisplay}}>

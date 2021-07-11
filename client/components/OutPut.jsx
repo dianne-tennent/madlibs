@@ -23,7 +23,7 @@ function OutPut(props) {
                 </div>
                 <div className="heading-container">
                     <h1>Your Madlib!</h1>
-                    <img className="story-image" src='/images/laughing-face-white.png' />
+                    <img className="story-image-header" src='/images/laughing-face-white.png' />
                 </div>
             </div>
             <div className="story-body">

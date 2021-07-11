@@ -1,3 +1,4 @@
 {
-    "terminal.integrated.localEchoStyle": null
+    "terminal.integrated.localEchoStyle": null,
+    "diffEditor.wordWrap": "on"
 }

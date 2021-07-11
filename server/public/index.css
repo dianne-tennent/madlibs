@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Padauk&family=Allerta+Stencil&display=swap');
 
 html, body {
-    margin: auto;
+    margin: 10px auto;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -19,16 +19,16 @@ html, body {
 
 .home-header {
     font-family: 'Allerta Stencil', sans-serif;
-    height: 20vh;
-    background-color: #431b93;
+    height: 15vh;
+    background-color: #FE621D;
     color: white;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     padding: 50px;
-    margin: 10px 0 0 0;
-    font-size: 20px;
+    margin: 0;
+    font-size: 16px;
     text-align: center;
     border-radius: 10px;
 }
@@ -40,23 +40,16 @@ html, body {
 
 .header {
     font-family: 'Allerta Stencil', sans-serif;
-    background-color: #431b93;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    margin: 10px 0 0 0;
-    padding: 20px 20px 40px 20px;
-    font-size: 6vw;
-    text-align: center;
+    background-color: #FE621D;
+    display: grid;
+    grid-template-rows: 10% 90%;
+    margin: 0;
+    padding: 20px;
     border-radius: 10px;
 }
 
 .home-icon-container {
     width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
 }
 
 .home-icon-container img {
@@ -70,12 +63,14 @@ html, body {
 }
 
 .heading-container {
+    grid-row: 2;
     display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 h1 {
-    margin: 0px;
-    font-size: 6vw;
+    font-size: 60px;
 }
 
 h3 {
@@ -83,26 +78,31 @@ h3 {
     margin: 0;
 }
 
-.story-image {
-    max-width: 120px;
+.story-image-header {
+    margin-left: 20px;
+    object-fit: contain;
+    width: 15%;
+}
+
+.story-image-button {
+    height: 90%;
+    object-fit: contain;
 }
 
 .menu {
     height: 65vh;
-    background-color: #0542b9;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    align-items: center;
+    background-color: #7D53DE;
+    display: grid;
+    grid-template-columns: 50% 50%;
     margin: 10px 0 0 0;
     border-radius: 10px;
+    padding: 10px;
 }
 
 .menu button, .confirm button, .instructions button {
-    color: white;
+    color: black;
     font-family: 'Allerta Stencil', sans-serif;
-    background-color: #268903;
+    background-color: #F1D302;
     padding: 40px 25px;
     text-align: center;
     cursor: pointer;
@@ -122,8 +122,7 @@ h3 {
 }
 
 .story-body {
-    height: 65vh;
-    background-color: #0542b9;
+    background-color: #7D53DE;
     display: flex;
     flex-direction: column;
     margin: 10px 0 0 0;
@@ -185,7 +184,7 @@ h3 {
 .input-list-content {
     width: 80vw;
     margin: auto;
-    padding: 50px;
+    padding: 40px;
 }
 
 .input-list input, select {
@@ -240,7 +239,7 @@ h3 {
     display: flex;
     font-size: 24px;
     font-weight: bold;
-    padding: 0 40px 20px 40px;
+    padding: 40px;
     flex-direction: column;
     width: 80%;
     margin: 20px auto;
@@ -263,8 +262,6 @@ h3 {
 .confirm {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
 }
 
 .story-output {
@@ -300,6 +297,7 @@ h3 {
 
 .user-input-area label {
     font-size: 24px;
+    color: black;
 }
 
 .footer {
@@ -319,26 +317,47 @@ h3 {
         height: 100%;
     }
     h1 {
-        font-size: 16vw;
+        font-size: 12vw;
+    }
+
+    .menu {
+        grid-template-columns: none;
+        grid-template-rows: 50% 50%;
+        grid-gap: 5px;
+    }
+
+    .story-menu {
+        display: flex;
+        flex-direction: column;
+        height: inherit;
+    }
+
+    .story-menu img {
+        width: 80%;
     }
 
     .story-workspace {
         display: flex;
         flex-direction: column;
+        height: 20%;
     }
 
     .menu button, .confirm button, .instructions button {
         font-family: 'Allerta Stencil', sans-serif;
-        padding: 15px 25px;
+        padding: 30px 25px;
         text-align: center;
         cursor: pointer;
         outline: none;
         border: none;
         border-radius: 10px;
         box-shadow: 0 9px #999;
-        margin: 20px;
-        font-size: 15vw;
+        margin: 10px auto;
+        font-size: 8vw;
         width: 90%;
+    }
+
+    .story-image-button {
+        height: 50%;
     }
 
     .header h1 {
@@ -346,9 +365,16 @@ h3 {
     }
 
     .instructions {
-        width: 90%;
-        margin: auto;
-        font-size: 5vw;
+        width: 65%;
+        font-size: 7vw;
+    }
+
+    .story-body {
+        padding: 10px;
+    }
+
+    .story-text {
+        padding: 5px;
     }
 
 
