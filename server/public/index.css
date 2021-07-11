@@ -35,7 +35,7 @@ html, body {
 
 .caption {
     font-style: italic;
-    margin-bottom: 10px;
+    margin-top: 20px;
 }
 
 .header {
@@ -324,6 +324,10 @@ h3 {
     }
     h1 {
         font-size: 12vw;
+    }
+
+    .header .home-header {
+        padding: 20px;
     }
 
     .menu {
