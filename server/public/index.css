@@ -260,8 +260,7 @@ h3 {
 }
 
 .confirm {
-    display: flex;
-    flex-direction: column;
+    display: block;
 }
 
 .story-output {
@@ -309,6 +308,13 @@ h3 {
     align-items: center;
     justify-content: center;
     margin: 10px 0;
+}
+
+.arrow-highlight {
+    background-color: #ff8601;
+    padding:0.1em 0.2em;
+    margin: 0 0.1em;
+    border-radius: 5px;
 }
 
 @media (max-width: 500px) {
@@ -371,6 +377,12 @@ h3 {
 
     .story-body {
         padding: 10px;
+        display: grid;
+    }
+
+    .confirm {
+        width: 80%;
+        margin: auto;
     }
 
     .story-text {
@@ -380,9 +392,4 @@ h3 {
 
 }
 
-.arrow-highlight {
-    background-color: #ff8601;
-    padding:0.1em 0.2em;
-    margin: 0 0.1em;
-    border-radius: 5px;
-}
+
