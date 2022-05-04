@@ -2,6 +2,9 @@ const path = require('path')
 
 module.exports = {
   development: {
+    seeds: {
+      directory: 'server/db/seeds/stories.js'
+    },
     client: 'sqlite3',
     connection: {
       filename: path.join(__dirname, 'dev.sqlite3')
